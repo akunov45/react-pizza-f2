@@ -1,0 +1,18 @@
+
+.btn {
+  padding: 8px 32px;
+  border-radius: 8px;
+  background-color: #e7e5e4;
+  font-size: 18px;
+  transition:  background-color ease .15s;
+}
+
+.btn.active {
+  background-color: black;
+  color: white;
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
