@@ -7,10 +7,13 @@ const { Provider, Consumer } = CART_CONTEXT
 
 const CartContext = ({children}) => {
     const [cart, setCart] = useState([])
+    const [name, setName] = useState("")
 
     const value = {
         cart, // [{...}, {....}]
         setCart, // function
+        setName,
+        name
     }
 
     return (

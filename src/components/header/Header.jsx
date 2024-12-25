@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './Header.css'
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
@@ -8,20 +8,31 @@ import { Link } from "react-router";
 
 // useState, useEffect, useContext
 const Header = () => {
-    const { cart } = useContext(CART_CONTEXT)
+    const { cart , setName} = useContext(CART_CONTEXT)
+    const [pizzaName, setPizzaName] = useState("")
+
+    const onChange = (e) => {
+        const text = e.target.value
+        setPizzaName(text)
+        setName(text)
+    }
+
     return (
         <header className='container'>
             <div className='logo'>
-                <img src="https://react-pizza-v2-psi.vercel.app/assets/img/logo.svg" alt="" />
-                <div>
-                    <h4>React Pizza</h4>
-                    <p>лучшая пицца в вашем городе</p>
-                </div>
+                <Link to="/">
+                    <img src="https://react-pizza-v2-psi.vercel.app/assets/img/logo.svg" alt="" />
+                    <div>
+                        <h4>React Pizza</h4>
+                        <p>лучшая пицца в вашем городе</p>
+                    </div>
+                </Link>
             </div>
             <div className='search'>
                 <div>
                     <span> <FiSearch /> </span>
-                    <input type="text" placeholder='Поиск...' />
+                    <input
+                        value={pizzaName} onChange={onChange} type="text" placeholder='Поиск...' />
                 </div>
             </div>
             <div className='buttons'>

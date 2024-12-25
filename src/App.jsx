@@ -39,18 +39,18 @@ const buttons = [
 ]
 
 const App = () => {
-  const [activeBtn, setActiveBtn] = useState('Гриль')
+  const [activeBtn, setActiveBtn] = useState('Все')
   const [pizzaData, setPizzaData] = useState([])
 
   useEffect(() => {
-    const url = 'https://run.mocky.io/v3/592376c2-1f1d-47ef-b487-711bd84b802c'
+    const url = 'https://673c34cc96b8dcd5f3f8e777.mockapi.io/api/v1/pizza2'
     fetch(url)
       .then( (response) => {
         return response.json() // "{ pizza : []}" -> {pizza: []}
       })
       .then( (data) => {
         console.log(data);
-        setPizzaData(data.menu)
+        setPizzaData(data[0].menu)
       })
       .catch( (error) => {})
   }, [])
@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="container filter-buttons">
         {buttons.map((btn) => {
           return <Button
@@ -71,7 +71,7 @@ const App = () => {
             name={btn.name} />
         })}
       </div>
-      <Pizza  pizzaData={pizzaData} />
+      <Pizza  pizzaData={pizzaData} activeBtn={activeBtn}  />
       {/* <Check/> */}
     </div>
   )

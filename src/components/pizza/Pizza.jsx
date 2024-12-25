@@ -5,8 +5,8 @@ import { useContext } from 'react'
 import { CART_CONTEXT } from '../../context/CartContext'
 
 const Pizza = (props) => {
-    const { pizzaData } = props
-    const {setCart} = useContext(CART_CONTEXT)
+    const { pizzaData, activeBtn } = props
+    const { setCart, name } = useContext(CART_CONTEXT)
 
     const addToCart = (pizza) => {
         // pizza  = {} []-length [].length - fn.length - "alex".length
@@ -15,11 +15,22 @@ const Pizza = (props) => {
             return [...oldPizza, pizza]
         })
     }
+    let arr = pizzaData;
+
+    // Фильтр по имени
+    if (name) {
+        arr = arr.filter(item => item.name.includes(name));
+    }
+    
+    // Фильтр по категории
+    if (activeBtn !== "Все") {
+        arr = arr.filter(item => item.category === activeBtn);
+    }
 
     // map, filter, sort, reduce
     return (
         <div className="container pizza-wrap">
-            {pizzaData.map((item) => {
+            {arr.map((item) => {
                 return <div className="p-card" key={item.name} >
                     <div>
                         <img src={item.image} alt="" />
@@ -35,7 +46,7 @@ const Pizza = (props) => {
                         </div>
                         <div className='p-footer'>
                             <h4> {item.price} </h4>
-                            <button onClick={()=>{
+                            <button onClick={() => {
                                 addToCart(item)
                             }}>В корзину</button>
                         </div>
